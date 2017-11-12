@@ -12,10 +12,7 @@ const ProtestSchema = new Schema({
 state: { type: String,/* enum: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'ACT', 'NT']*/ },
 	coords: [Number],
 	comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-	attendees: {
-		going: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-		interested: [{ type: Schema.Types.ObjectId, ref: 'User' }]
-	}
+	attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 },
 { timestamps: true }
 );

@@ -130,4 +130,27 @@ export default {
 		};
 	},
 
+	subscribe: async (req, res) => {
+		req.currentUser = "5a015ce903c3bf06ccd8e44d";
+		try {
+			await User.findByIdAndUpdate(req.curentUser, { $push: { subscriptions_attending: req.params.id }});
+			await Protest.findByIdAndUpdate(req.params.id, { $push: { attendees: req.curentUser }});
+			res.json({ message: "Subscribed."});
+		} catch (err) {
+			console.log(err);
+			res.status(400).json({ errors: err });
+		};
+	},
+
+	unsubscribe: async (req, res) => {
+		req.currentUser = "5a015ce903c3bf06ccd8e44d";
+		try {
+			await User.findByIdAndUpdate(req.currentUser, { $pull: { subscriptions_attending: req.params.id }});
+			await Protest.findByIdAndUpdate(req.params.id, { $pull: { attendees: req.curretUser }});
+			res.json({ message: "Unsubscribed."});
+		} catch (err) {
+			console.log(err);
+			res.status(400).json({ errors: err });
+		}; 
+	},
 };

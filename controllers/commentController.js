@@ -11,7 +11,7 @@ export default {
 				author: req.currentUser,
 				body: req.body.data.body
 			});
-			const protest = await Protest.findByIdAndUpdate(req.params.id,	{ $push: { comments: {_id: comment._id} }}, {new: true}).populate('comments');
+			const protest = await Protest.findByIdAndUpdate(req.params.id,	{ $push: { comments: comment._id }}, {new: true}).populate('comments');
 			res.json({ protest })
 		} catch (err) {
 			console.log(err);
